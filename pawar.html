@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Nikhil Pawar Built Swastik Empire</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .header {
+            text-align: center;
+            padding: 30px 20px;
+            background: rgba(255,255,255,0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .adani-text {
+            color: #e74c3c;
+        }
+
+        .subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .timeline-container {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .road {
+            position: absolute;
+            width: 120px;
+            height: 3000px;
+            background: #2c3e50;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 60px;
+        }
+
+        .road::before {
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                #fff 0px,
+                #fff 30px,
+                transparent 30px,
+                transparent 60px
+            );
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .curved-road {
+            position: absolute;
+            width: 120px;
+            height: 300px;
+            border: 60px solid #2c3e50;
+            border-radius: 50%;
+            border-top: transparent;
+            border-bottom: transparent;
+            left: calc(50% - 60px);
+        }
+
+        .curve-1 { top: 800px; }
+        .curve-2 { top: 1400px; transform: scaleX(-1); }
+        .curve-3 { top: 2000px; }
+        .curve-4 { top: 2600px; transform: scaleX(-1); }
+
+        .milestone {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .milestone.left {
+            right: calc(50% + 80px);
+            flex-direction: row-reverse;
+        }
+
+        .milestone.right {
+            left: calc(50% + 80px);
+        }
+
+        .year-badge {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            margin: 0 20px;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        .company-card {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            min-width: 280px;
+            border-left: 4px solid #e74c3c;
+            transition: all 0.3s ease;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .company-name {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .company-desc {
+            font-size: 0.9rem;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 8px;
+        }
+
+        .company-type {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .type-launch { background: #e8f5e8; color: #27ae60; }
+        .type-expansion { background: #e3f2fd; color: #2196f3; }
+        .type-ipo { background: #fff3e0; color: #ff9800; }
+        .type-acquisition { background: #fce4ec; color: #e91e63; }
+
+        .founder-image {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+
+        .founder-text {
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .connector {
+            position: absolute;
+            width: 2px;
+            height: 30px;
+            background: #bdc3c7;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Specific milestone positions */
+        .m-2027 { top: 100px; }
+        .m-2029 { top: 300px; }
+        .m-2030 { top: 500px; }
+        .m-2031 { top: 700px; }
+        .m-2032 { top: 900px; }
+        .m-2033 { top: 1100px; }
+        .m-2034 { top: 1300px; }
+        .m-2035 { top: 1500px; }
+        .m-2036 { top: 1700px; }
+        .m-2038 { top: 1900px; }
+        .m-2040 { top: 2100px; }
+        .m-2042 { top: 2300px; }
+        .m-2044 { top: 2500px; }
+        .m-2045 { top: 2700px; }
+        .m-2047 { top: 2900px; }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .milestone {
+            animation: slideIn 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .milestone.left {
+                right: calc(50% + 60px);
+            }
+            
+            .milestone.right {
+                left: calc(50% + 60px);
+            }
+            
+            .company-card {
+                min-width: 200px;
+                padding: 12px 15px;
+            }
+            
+            .founder-image {
+                width: 100px;
+                height: 100px;
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1 class="main-title">HOW NIKHIL PAWAR BUILT <span class="adani-text">SWASTIK</span> GROUP</h1>
+        <p class="subtitle">*Timeline Shows The Establishment Year & The Growth Journey of All Swastik Group Companies</p>
+    </div>
+    
+    <div class="timeline-container">
+        <div class="road"></div>
+        
+        <!-- 2027 - TrimX -->
+        <div class="milestone m-2027 right">
+            <div class="year-badge">2027</div>
+            <div class="company-card">
+                <div class="company-name">TrimX</div>
+                <div class="company-desc">The Foundation Stone - First venture marking the beginning of Swastik Empire</div>
+                <span class="company-type type-launch">Launch</span>
+            </div>
+        </div>
+        
+        <!-- 2029 - Rupiyo Payments -->
+        <div class="milestone m-2029 left">
+            <div class="year-badge">2029</div>
+            <div class="company-card">
+                <div class="company-name">Rupiyo Payments</div>
+                <div class="company-desc">BNPL Services - Entry into Fintech Revolution</div>
+                <span class="company-type type-launch">Launch</span>
+            </div>
+        </div>
+        
+        <!-- 2030 - Dual Launch -->
+        <div class="milestone m-2030 right">
+            <div class="year-badge">2030</div>
+            <div class="company-card">
+                <div class="company-name">Swastik Infotech & Yuva Sports</div>
+                <div class="company-desc">IT Services + Sports Management (IPL, PKL, ISL)</div>
+                <span class="company-type type-launch">Launch</span>
+            </div>
+        </div>
+        
+        <!-- 2031 - Sugar Industry -->
+        <div class="milestone m-2031 left">
+            <div class="year-badge">2031</div>
+            <div class="company-card">
+                <div class="company-name">Swastik Sugar</div>
+                <div class="company-desc">Agricultural Diversification (Alsund, SonarSidh)</div>
+                <span class="company-type type-launch">Launch</span>
+            </div>
+        </div>
+        
+        <!-- 2032 - Strategic Move -->
+        <div class="milestone m-2032 right">
+            <div class="year-badge">2032</div>
+            <div class="company-card">
+                <div class="company-name">TrimX Divestment + Rupiyo Expansion</div>
+                <div class="company-desc">50% TrimX shares sold, Rupiyo adds UPI & Insurance</div>
+                <span class="company-type type-expansion">Strategy</span>
+            </div>
+        </div>
+        
+        <!-- 2033 - Healthcare Entry -->
+        <div class="milestone m-2033 left">
+            <div class="year-badge">2033</div>
+            <div class="company-card">
+                <div class="company-name">Swastik Medicover & Institute</div>
+                <div class="company-desc">Healthcare Revolution (Vita, Airoli, Hinjewadi)</div>
+                <span class="company-type type-launch">Launch</span>
+            </div>
+        </div>
+        
+        <!-- 2034 - Multi-sector Growth -->
+        <div class="milestone m-2034 right">
+            <div class="year-badge">2034</div>
+            <div class="company-card">
+                <div class="company-name">Nationwide Healthcare + Investment</div>
+                <div class="company-desc">Medicover expansion to major cities, Rupiyo Investment services</div>
+                <span class="company-type type-expansion">Expansion</span>
+            </div>
+        </div>
+        
+        <!-- 2035 - Sports Infrastructure -->
+        <div class="milestone m-2035 left">
+            <div class="year-badge">2035</div>
+            <div class="company-card">
+                <div class="company-name">International Sports + Stadium</div>
+                <div class="company-desc">SA20, Dubai operations + Sharadchandra Pawar Cricket Stadium</div>
+                <span class="company-type type-expansion">Global</span>
+            </div>
+        </div>
+        
+        <!-- 2036 - Aviation & International IT -->
+        <div class="milestone m-2036 right">
+            <div class="year-badge">2036</div>
+            <div class="company-card">
+                <div class="company-name">Swastik Airports + Global IT</div>
+                <div class="company-desc">Aviation Infrastructure + International Infotech Expansion</div>
+                <span class="company-type type-launch">Launch</span>
+            </div>
+        </div>
+        
+        <!-- 2038 - Real Estate & Hospitality Empire -->
+        <div class="milestone m-2038 left">
+            <div class="year-badge">2038</div>
+            <div class="company-card">
+                <div class="company-name">Reality + Infocity + Xperia + Imperial</div>
+                <div class="company-desc">Real Estate, IT Parks, Malls, Luxury Hotels - Complete Ecosystem</div>
+                <span class="company-type type-launch">Empire</span>
+            </div>
+        </div>
+        
+        <!-- 2040 - IPO Wave -->
+        <div class="milestone m-2040 right">
+            <div class="year-badge">2040</div>
+            <div class="company-card">
+                <div class="company-name">Major IPOs + Green Energy</div>
+                <div class="company-desc">Infotech & Rupiyo IPOs, Green Energy Launch, Gokul Milk & Agro</div>
+                <span class="company-type type-ipo">IPO Wave</span>
+            </div>
+        </div>
+        
+        <!-- 2042 - Pan-India Expansion -->
+        <div class="milestone m-2042 left">
+            <div class="year-badge">2042</div>
+            <div class="company-card">
+                <div class="company-name">Pan-India Dominance</div>
+                <div class="company-desc">Expansion to 15+ cities across all verticals - Nationwide presence</div>
+                <span class="company-type type-expansion">National</span>
+            </div>
+        </div>
+        
+        <!-- 2044 - Telecom & Digital -->
+        <div class="milestone m-2044 right">
+            <div class="year-badge">2044</div>
+            <div class="company-card">
+                <div class="company-name">Swigo Telecomm + Digital Ecosystem</div>
+                <div class="company-desc">Mobile Network, SwigoLiv, SwigoFy, SwigoPay - Complete Digital Life</div>
+                <span class="company-type type-launch">Digital</span>
+            </div>
+        </div>
+        
+        <!-- 2045 - Major Acquisitions -->
+        <div class="milestone m-2045 left">
+            <div class="year-badge">2045</div>
+            <div class="company-card">
+                <div class="company-name">Media & Delivery Empire</div>
+                <div class="company-desc">Zee TV, Zepto, Swiggy Acquisitions + Sports Infrastructure</div>
+                <span class="company-type type-acquisition">Acquisitions</span>
+            </div>
+        </div>
+        
+        <!-- 2047 - Electric Future -->
+        <div class="milestone m-2047 right">
+            <div class="year-badge">2047</div>
+            <div class="company-card">
+                <div class="company-name">Swigo Evx</div>
+                <div class="company-desc">Electric Vehicle Revolution - Completing the Sustainable Empire</div>
+                <span class="company-type type-launch">Future</span>
+            </div>
+        </div>
+        
+        <div class="founder-image">
+            <div class="founder-text">
+                NIKHIL<br>
+                PAWAR<br>
+                <small>Founder & Chairman</small>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Add smooth scroll animation
+        let currentYear = 2027;
+        const milestones = document.querySelectorAll('.milestone');
+        
+        function animateTimeline() {
+            milestones.forEach((milestone, index) => {
+                setTimeout(() => {
+                    milestone.style.opacity = '0';
+                    milestone.style.transform = 'translateX(-50px)';
+                    
+                    setTimeout(() => {
+                        milestone.style.opacity = '1';
+                        milestone.style.transform = 'translateX(0)';
+                        milestone.style.transition = 'all 0.8s ease-out';
+                    }, 100);
+                }, index * 200);
+            });
+        }
+        
+        // Auto-scroll timeline
+        let scrollPosition = 0;
+        function autoScroll() {
+            scrollPosition += 1;
+            window.scrollTo(0, scrollPosition);
+            
+            if (scrollPosition < document.body.scrollHeight - window.innerHeight) {
+                setTimeout(autoScroll, 50);
+            }
+        }
+        
+        // Start animation after page load
+        window.addEventListener('load', () => {
+            setTimeout(animateTimeline, 1000);
+            setTimeout(autoScroll, 3000);
+        });
+        
+        // Add hover effects
+        document.querySelectorAll('.company-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+                this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.1)';
+            });
+        });
+    </script>
+</body>
+</html>

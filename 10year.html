@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLA Development Roadmap 2035-2044</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="50" cy="10" r="0.5" fill="rgba(255,255,255,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stats-bar {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 1rem;
+            margin-top: 2rem;
+            border-radius: 15px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Navigation */
+        .nav {
+            background: #fff;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 1rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            padding: 0 1rem;
+        }
+
+        .nav-link {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        /* Section Styling */
+        .section {
+            padding: 4rem 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+            border-radius: 2px;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #ff6b35, #f7931e);
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            opacity: 0;
+            animation: fadeInUp 0.6s forwards;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: 50%;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: 50%;
+            margin-left: 0;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .timeline-year {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff6b35;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-projects {
+            list-style: none;
+        }
+
+        .timeline-projects li {
+            margin: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .timeline-projects li::before {
+            content: '✅';
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: #ff6b35;
+            border: 4px solid white;
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px #ff6b35;
+        }
+
+        /* Project Cards */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #ff6b35, #f7931e);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .project-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Achievements */
+        .achievement-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .achievement-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .achievement-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .achievement-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #ff6b35;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .footer h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .footer p {
+            opacity: 0.8;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .animate-on-scroll.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+
+            .section h2 {
+                font-size: 2rem;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                padding-left: 40px !important;
+                padding-right: 0 !important;
+                text-align: left !important;
+            }
+
+            .timeline-dot {
+                left: 20px;
+                transform: translateX(-50%);
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <h1>MLA Development Vision</h1>
+            <p>Transforming 126 Villages & 4 Tehsils | 2035-2044</p>
+            
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <span class="stat-number">126</span>
+                    <span class="stat-label">Villages</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Tehsils</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50,000+</span>
+                    <span class="stat-label">Jobs Created</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">14</span>
+                    <span class="stat-label">Major Projects</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="#phase1" class="nav-link">Phase 1 (2035-39)</a>
+            <a href="#phase2" class="nav-link">Phase 2 (2040-44)</a>
+            <a href="#projects" class="nav-link">Key Projects</a>
+            <a href="#achievements" class="nav-link">Expected Outcomes</a>
+            <a href="#contact" class="nav-link">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Phase 1 Section -->
+    <section id="phase1" class="section">
+        <div class="container">
+            <h2>Phase 1: Foundation Building (2035-2039)</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2035</div>
+                        <ul class="timeline-projects">
+                            <li>Village-level surveys for Water, Roads, Solar, Temple needs</li>
+                            <li>Finalize MIDC land in 4 tehsils (250 acres each)</li>
+                            <li>Begin DPRs for CC roads, Solar Parks, Bus Stands</li>
+                            <li>Start pilot projects: 24x7 Water in 10 villages</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2036</div>
+                        <ul class="timeline-projects">
+                            <li>Water pipeline Phase 1 continues (50 villages)</li>
+                            <li>CC road Phase 1 completes (30 roads)</li>
+                            <li>Solar Parks scaled to 30 villages</li>
+                            <li>MIDC: 10 companies onboarded in Khanapur</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2037</div>
+                        <ul class="timeline-projects">
+                            <li>Intercity Road Phase 1: 2 routes completed</li>
+                            <li>MIDC Atpadi: 15 companies operational</li>
+                            <li>Airport-style depots construction begins</li>
+                            <li>Sanskruti Mandir Mission in 90 villages</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2038</div>
+                        <ul class="timeline-projects">
+                            <li>126 solar parks completed</li>
+                            <li>126 CC roads fully functional</li>
+                            <li>All 4 MIDC zones with 60+ companies active</li>
+                            <li>Intercity Road Project Phase 2 completed</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2039</div>
+                        <ul class="timeline-projects">
+                            <li>All 126 villages with 24x7 piped water</li>
+                            <li>Grand inauguration of all Smart Bus Depots</li>
+                            <li>Host Mega "Tehsil Udyog Mahotsav"</li>
+                            <li>Complete infrastructure foundation established</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Phase 2 Section -->
+    <section id="phase2" class="section">
+        <div class="container">
+            <h2>Phase 2: Advanced Development (2040-2044)</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2040</div>
+                        <ul class="timeline-projects">
+                            <li>Proposal to rename Khanapur to Shivthirth</li>
+                            <li>Begin Shivaji Maharaj World Temple construction</li>
+                            <li>EV Charging Hub blueprint finalization</li>
+                            <li>Rail link DPR: Miraj–Vita–Shivthirth–Atpadi–Sangli</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2041</div>
+                        <ul class="timeline-projects">
+                            <li>South Maharashtra Health Tech Park foundation</li>
+                            <li>ISRO Aerospace Center construction begins at Vita</li>
+                            <li>First 15 EV buses launched</li>
+                            <li>National sanction for Drone Hub at Atpadi</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2042</div>
+                        <ul class="timeline-projects">
+                            <li>Dual-track railway construction begins</li>
+                            <li>Health Tech Park: Medical AI R&D lab opened</li>
+                            <li>All 126 villages get smart streetlights & solar CCTV</li>
+                            <li>IT Park Phase 1 completed</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2043</div>
+                        <ul class="timeline-projects">
+                            <li>Launch Aero Expo – 2043 in Vita</li>
+                            <li>Temple Tourism Circuit with 50 homestays</li>
+                            <li>MIDC: 120 companies across 4 zones</li>
+                            <li>Drone Hub receives National Center status</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-year">2044</div>
+                        <ul class="timeline-projects">
+                            <li>Grand Inauguration of Shivthirth Temple Complex</li>
+                            <li>Health Tech Park: India's first rural MedTech SEZ</li>
+                            <li>IT Park jobs cross 5,000 employees</li>
+                            <li>Complete railway network operational</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Projects Section -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2>Key Development Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <span class="project-icon">💧</span>
+                    <h3 class="project-title">Water Infrastructure</h3>
+                    <p class="project-description">24x7 piped water supply to all 126 villages through Takari, Tembu, Mhasal Yojana expansion with modern pipeline network.</p>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-icon">🏭</span>
+                    <h3 class="project-title">MIDC Industrial Zones</h3>
+                    <p class="project-description">4 MIDC zones (250 acres each) with 120+ companies creating employment for 50,000+ people across all tehsils.</p>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-icon">🚌</span>
+                    <h3 class="project-title">Smart Transportation</h3>
+                    <p class="project-description">126 modern bus stands, 4 airport-style depots, EV bus fleet, and comprehensive intercity road network.</p>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-icon">🏛️</span>
+                    <h3 class="project-title">Shivthirth Temple</h3>
+                    <p class="project-description">World's largest Shivaji Maharaj Temple complex with cultural museum, renaming Khanapur to Shivthirth.</p>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-icon">🚀</span>
+                    <h3 class="project-title">Aerospace Cluster</h3>
+                    <p class="project-description">ISRO partnership for Vita Aerospace Center, satellite subsystem development, and space technology startups.</p>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-icon">🏥</span>
+                    <h3 class="project-title">Health Tech Park</h3>
+                    <p class="project-description">South Maharashtra Health Tech Park with Medical AI R&D lab, rural MedTech SEZ, and drone medical services.</p>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-icon">🛩️</span>
+                    <h3 class="project-title">National Drone Hub</h3>
+                    <p class="project-description">Atpadi Drone Hub with R&D facilities, startup incubation, training center, and international exports.</p>
+                </div>
+
+                <div class="project-card">
+                    <span class="project-icon">🚄</span>
+                    <h3 class="project-title">Railway Network</h3>
+                    <p class="project-description">Miraj–Vita–Shivthirth–Atpadi–Sangli rail link with Shivthirth Junction and freight terminals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="section">
+        <div class="container">
+            <h2>Expected Outcomes by 2044</h2>
+            <div class="achievement-grid">
+                <div class="achievement-item">
+                    <span class="achievement-number">126</span>
+                    <span class="achievement-label">Villages Fully Developed</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-number">120+</span>
+                    <span class="achievement-label">Industries Established</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-number">50,000+</span>
+                    <span class="achievement-label">Direct Jobs Created</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-number">75</span>
+                    <span class="achievement-label">EV Buses Operational</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-number">5,000+</span>
+                    <span class="achievement-label">IT Park Jobs</span>
+                </div>
+                <div class="achievement-item">
+                    <span class="achievement-number">1</span>
+                    <span class="achievement-label">World's Largest Temple</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <h3>Contact Information</h3>
+            <p>MLA Development Office</p>
+            <p>Email: development@mlaoffice.gov.in</p>
+            <p>Phone: +91-XXXXX-XXXXX</p>
+            <p>Address: Khanapur (Shivthirth), Maharashtra</p>
+            <br>
+            <p>&copy; 2035 MLA Development Roadmap. All rights reserved.</p>
+            <p>Building a prosperous future for 126 villages and 4 tehsils</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (targetSection) {
+                    targetSection.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all timeline items and cards
+        document.querySelectorAll('.timeline-item, .project-card, .achievement-item').forEach(item => {
+            item.classList.add('animate-on-scroll');
+            observer.observe(item);
+        });
+
+        // Add staggered animation delay to timeline items
+        document.querySelectorAll('.timeline-item').forEach((item, index) => {
+            item.style.animationDelay = `${index * 0.2}s`;
+        });
+
+        // Add hover effects to project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.background = 'linear-gradient(135deg, #fff 0%, #f8f9fa 100%)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.background = 'white';
+            });
+        });
+
+        // Counter animation for achievement numbers
+        function animateCounters() {
+            const counters = document.querySelectorAll('.achievement-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.textContent.replace(/[^0-9]/g, ''));
+                const increment = target / 100;
+                let current = 0;
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.textContent = counter.textContent.replace(/[0-9,+]/g, '') + target.toLocaleString() + (counter.textContent.includes('+') ? '+' : '');
+                        clearInterval(timer);
+                    } else {
+                        counter.textContent = counter.textContent.replace(/[0-9,+]/g, '') + Math.ceil(current).toLocaleString() + (counter.textContent.includes('+') ? '+' : '');
+                    }
+                }, 20);
+            });
+        }
+
+        // Trigger counter animation when achievements section is visible
+        const achievementsSection = document.querySelector('#achievements');
+        const achievementsObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounters();
+                    achievementsObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        achievementsObserver.observe(achievementsSection);
+    </script>
+</body>
+</html>

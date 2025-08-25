@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-Year MLA Development Roadmap Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #feca57);
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .year-section {
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .year-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-size: 1.8em;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            border: 4px solid white;
+        }
+
+        .quarter {
+            display: flex;
+            margin-bottom: 40px;
+            position: relative;
+            align-items: flex-start;
+        }
+
+        .quarter:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .quarter-content {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 30px;
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .quarter-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+
+        .quarter:nth-child(2) .quarter-content { border-left-color: #ff6b6b; }
+        .quarter:nth-child(3) .quarter-content { border-left-color: #4ecdc4; }
+        .quarter:nth-child(4) .quarter-content { border-left-color: #45b7d1; }
+        .quarter:nth-child(5) .quarter-content { border-left-color: #96ceb4; }
+
+        .quarter-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f8f9fa;
+        }
+
+        .quarter-title {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-right: 15px;
+        }
+
+        .quarter-icon {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .quarter:nth-child(2) .quarter-icon { background: #ff6b6b; }
+        .quarter:nth-child(3) .quarter-icon { background: #4ecdc4; }
+        .quarter:nth-child(4) .quarter-icon { background: #45b7d1; }
+        .quarter:nth-child(5) .quarter-icon { background: #96ceb4; }
+
+        .projects-list {
+            list-style: none;
+        }
+
+        .project-item {
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 3px solid #e9ecef;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-item:hover {
+            background: #e8f4fd;
+            border-left-color: #007bff;
+            transform: translateX(5px);
+        }
+
+        .project-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 0;
+            background: linear-gradient(45deg, rgba(0, 123, 255, 0.1), rgba(0, 123, 255, 0.05));
+            transition: width 0.3s ease;
+        }
+
+        .project-item:hover::before {
+            width: 100%;
+        }
+
+        .project-text {
+            font-size: 0.95em;
+            line-height: 1.5;
+            color: #495057;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            border: 4px solid;
+            z-index: 5;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .quarter:nth-child(2) .timeline-dot { border-color: #ff6b6b; }
+        .quarter:nth-child(3) .timeline-dot { border-color: #4ecdc4; }
+        .quarter:nth-child(4) .timeline-dot { border-color: #45b7d1; }
+        .quarter:nth-child(5) .timeline-dot { border-color: #96ceb4; }
+
+        .stats-footer {
+            margin-top: 50px;
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .quarter {
+                flex-direction: column !important;
+                margin-left: 60px;
+            }
+
+            .quarter-content {
+                margin: 0;
+                max-width: none;
+            }
+
+            .timeline-dot {
+                left: 30px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .year-badge {
+                font-size: 1.4em;
+                padding: 12px 24px;
+            }
+        }
+
+        .highlight {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏛️ 5-Year MLA Development Roadmap</h1>
+            <p>Transformative Infrastructure & Development Timeline (2040-2044)</p>
+        </div>
+
+        <div class="timeline">
+            <!-- 2040 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <div class="year-badge">2040 - Foundation Year</div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q1: Jan - Mar</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🌾 Expand <span class="highlight">Takari, Tembu, Mhasal Yojana</span> to 30 new villages</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🕉️ Initiate proposal to rename <span class="highlight">Khanapur to Shivthirth</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏛️ Finalize location for <span class="highlight">Shivaji Maharaj World Temple</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q2: Apr - Jun</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🏗️ Begin land acquisition for <span class="highlight">Shivthirth Temple (300 acres)</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">⚡ Electricity rate audit & subsidy proposal for farmers & industries</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🔋 Finalize 30-acre <span class="highlight">EV Charging Hub blueprint</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q3: Jul - Sep</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🚌 EV Depot planning in all 4 towns</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏗️ Start construction: <span class="highlight">Shivthirth Temple Phase 1</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚄 DPR of Rail link: <span class="highlight">Miraj–Vita–Shivthirth–Atpadi–Sangli</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q4: Oct - Dec</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🚁 Launch <span class="highlight">Drone Hub DPR</span> at Atpadi</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏭 Start MIDC Expansion Planning: 4 sectors × 30 companies</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚀 Approve ISRO partnership for <span class="highlight">Vita Aerospace Cluster</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2041 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <div class="year-badge">2041 - Infrastructure Year</div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q1: Jan - Mar</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🚄 Begin railway land acquisition</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏥 Lay foundation for <span class="highlight">South Maharashtra Health Tech Park (Shivthirth)</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🔋 EV Charging Station installation starts</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q2: Apr - Jun</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🌟 Launch <span class="highlight">Village Upliftment Mission</span>: each village gets 1 new MLA-led development project</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🛣️ Start road widening, streetlight, drainage upgrade in 3 towns</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q3: Jul - Sep</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🚀 Construction begins: <span class="highlight">ISRO Aerospace Center at Vita</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚌 First 15 EV buses launched</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚁 National sanction for <span class="highlight">Drone Hub</span> at Atpadi</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q4: Oct - Dec</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🏛️ Inaugurate Phase 1: <span class="highlight">Shivthirth Temple (Garbha Gruha & Statue)</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">💻 Start IT Park core building foundation</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏭 MIDC: 20 new companies onboarded</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2042 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <div class="year-badge">2042 - Construction Year</div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q1: Jan - Mar</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🚁 Drone Hub construction begins at Atpadi</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🌉 Start Flyover DPRs: Vita, Atpadi, Shivthirth</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚄 Begin dual-track railway construction: <span class="highlight">Miraj–Vita–Shivthirth</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q2: Apr - Jun</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🚄 <span class="highlight">Shivthirth Junction Railway Station</span> sanctioned</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏥 Health Tech Park: Medical AI R&D lab opened</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚀 ISRO Lab starts satellite subsystem prototyping</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q3: Jul - Sep</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">💡 All 126 villages get smart streetlights & solar CCTV</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">💻 IT Park Phase 1 completed</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚌 EV Depot Vita becomes live operational</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q4: Oct - Dec</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🌉 3 Flyovers construction begins</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚄 Railway Phase 1: <span class="highlight">Miraj–Vita–Shivthirth completed</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚁 Drone Hub: Startup Incubation Cell launched</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2043 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <div class="year-badge">2043 - Innovation Year</div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q1: Jan - Mar</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">✈️ Launch <span class="highlight">Aero Expo – 2043</span> in Vita (ISRO + private sector)</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏛️ Temple Tourism Circuit launch with 50 homestays</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚁 First medical drone service for rural delivery</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q2: Apr - Jun</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🚄 Start <span class="highlight">Railway Phase 2</span>: Shivthirth–Atpadi–Sangli</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏭 MIDC: Now 120 companies across 4 zones</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">💻 Inaugurate IT Park in Shivthirth MIDC</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q3: Jul - Sep</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">📱 Smart Governance App for all Panchayats</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏥 Health Tech Park exports first AI-based health system</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚌 Launch EV Bus Tracking App</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q4: Oct - Dec</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🚁 Drone Hub receives <span class="highlight">National Center status</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🌙 Begin Night Tourism Circuit around Shivthirth Temple</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚛 Rail freight terminal planning begins</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2044 -->
+            <div class="year-section">
+                <div class="year-header">
+                    <div class="year-badge">2044 - Completion Year</div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q1: Jan - Mar</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🌉 Final Flyover Inaugurations</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚄 Rail junction status granted to <span class="highlight">Shivthirth</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🌟 Each village completes 1 flagship innovation project</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q2: Apr - Jun</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🚌 Final rollout: EV buses across 4 depots (total 75 buses)</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏥 Health Tech Park: India's first rural <span class="highlight">MedTech SEZ notified</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🏛️ Inaugurate Phase 2: <span class="highlight">Shivthirth Temple & Cultural Museum</span></div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q3: Jul - Sep</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🚀 Inaugurate <span class="highlight">Aero-Defense Lab</span> (ISRO–Private JV)</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">🚁 Drone Hub exports to 5 nations</div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">💻 IT Park jobs cross 5,000 employees</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="quarter">
+                    <div class="timeline-dot"></div>
+                    <div class="quarter-content">
+                        <div class="quarter-header">
+                            <div class="quarter-icon"></div>
+                            <div class="quarter-title">Q4: Oct - Dec</div>
+                        </div>
+                        <ul class="projects-list">
+                            <li class="project-item">
+                                <div class="project-text">🏛️ Grand Inauguration of <span class="highlight">Shivthirth Temple Complex</span></div>
+                            </li>
+                            <li class="project-item">
+                                <div class="project-text">📊 Publish "MLA Digital Report Card 2040–44

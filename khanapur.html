@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5-Year MLA Development Roadmap Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #666;
+            -webkit-text-fill-color: #666;
+        }
+
+        .timeline-container {
+            position: relative;
+            margin: 40px 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .year-section {
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .year-header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .year-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .quarters-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .quarter-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .quarter-card:nth-child(even) {
+            border-left-color: #764ba2;
+        }
+
+        .quarter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .quarter-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .quarter-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            margin-right: 15px;
+        }
+
+        .quarter-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .project-item {
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #f8f9ff;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        .project-item:hover {
+            background: #f0f2ff;
+            transform: translateX(5px);
+        }
+
+        .project-item::before {
+            content: "🔹";
+            margin-right: 8px;
+            font-size: 1.1rem;
+        }
+
+        .project-text {
+            color: #444;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+
+        .deliverables {
+            margin-top: 50px;
+            background: linear-gradient(135deg, #f8f9ff, #fff);
+            border-radius: 15px;
+            padding: 30px;
+            border: 2px solid #e0e7ff;
+        }
+
+        .deliverables h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .deliverable-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .deliverable-item::before {
+            content: "✅";
+            font-size: 1.2rem;
+            margin-right: 12px;
+            margin-top: 2px;
+        }
+
+        .deliverable-text {
+            color: #333;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .progress-indicator {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .quarters-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .container {
+                padding: 20px;
+            }
+            
+            .timeline-line {
+                left: 20px;
+            }
+            
+            .progress-indicator {
+                display: none;
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-indicator">
+        📊 Total: 126 Villages | 4 Tehsils | 8 Projects
+    </div>
+
+    <div class="container">
+        <div class="header fade-in">
+            <h1>🏛️ 5-Year MLA Development Roadmap</h1>
+            <p>Comprehensive Village & Industrial Development Plan (Jan 2035 – Oct 2039)</p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline-line"></div>
+
+            <!-- 2035 -->
+            <div class="year-section fade-in">
+                <div class="year-header">
+                    <div class="year-badge">2035</div>
+                </div>
+                <div class="quarters-grid">
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q1</div>
+                            <div class="quarter-title">Jan – Mar 2035</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Village-level surveys: Water, Roads, Solar, Temple needs</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Finalize MIDC land in 4 tehsils (250 acres each)</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Begin DPRs for CC roads, Solar Parks, Bus Stands</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q2</div>
+                            <div class="quarter-title">Apr – Jun 2035</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Start tenders: Water pipelines, road construction</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Finalize designs for 126 bus stands & 4 airport-style depots</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">MIDC layout planning (Khanapur, Atpadi)</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q3</div>
+                            <div class="quarter-title">Jul – Sep 2035</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Begin pilot projects: 24x7 Water (10 villages), 5 Solar Parks</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Groundwork starts for 30 CC roads (Phase 1)</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Start work on 15 temples in larger villages</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q4</div>
+                            <div class="quarter-title">Oct – Dec 2035</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">MIDC Zone 1 (Khanapur): Infra setup (roads, water, electricity)</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Conduct "Invest Tehsil" Summit - Invite companies to MIDC</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Appoint contractors for bus stand Phase 1</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2036 -->
+            <div class="year-section fade-in">
+                <div class="year-header">
+                    <div class="year-badge">2036</div>
+                </div>
+                <div class="quarters-grid">
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q1</div>
+                            <div class="quarter-title">Jan – Mar 2036</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Water pipeline Phase 1 continues (50 villages)</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">CC road Phase 1 completes (30 roads), Phase 2 begins (40 roads)</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Solar Parks scaled to 30 villages</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q2</div>
+                            <div class="quarter-title">Apr – Jun 2036</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Temple construction in 40 more villages</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">MIDC Zone 2 (Atpadi) construction begins</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Bus stand construction starts (Phase 1 - 50 villages)</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q3</div>
+                            <div class="quarter-title">Jul – Sep 2036</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Intercity Road work: Vita–Sangli, Khanapur–Kolhapur route clearing begins</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Solar Parks: 50 installed</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">MIDC: 10 companies onboarded in Khanapur</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q4</div>
+                            <div class="quarter-title">Oct – Dec 2036</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">All 50 water pipeline villages activated</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">CC road Phase 2 completed</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Smart depot design finalized for 4 major towns</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2037 -->
+            <div class="year-section fade-in">
+                <div class="year-header">
+                    <div class="year-badge">2037</div>
+                </div>
+                <div class="quarters-grid">
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q1</div>
+                            <div class="quarter-title">Jan – Mar 2037</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Water supply Phase 2 (50 more villages)</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">MIDC Zone 3 (Vita) starts</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Launch skill development center near MIDC zones</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q2</div>
+                            <div class="quarter-title">Apr – Jun 2037</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Complete 80 CC roads total</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Airport-style depots begin construction (Khanapur & Atpadi)</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Solar parks reach 90 villages</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q3</div>
+                            <div class="quarter-title">Jul – Sep 2037</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Intercity Road Phase 1: 2 routes completed (Vita–Sangli & Atpadi–Solapur)</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">MIDC Atpadi: 15 companies operational</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">"Sanskruti Mandir Mission" in 90 villages done</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q4</div>
+                            <div class="quarter-title">Oct – Dec 2037</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Bus Stand Phase 2 (50 villages) construction completed</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Smart depot (Khanapur) ready to inaugurate</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Intercity Road Phase 2: Visapur–Kolhapur begins</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2038 -->
+            <div class="year-section fade-in">
+                <div class="year-header">
+                    <div class="year-badge">2038</div>
+                </div>
+                <div class="quarters-grid">
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q1</div>
+                            <div class="quarter-title">Jan – Mar 2038</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Water Supply Phase 3 (remaining 26 villages)</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">MIDC Zone 4 (Visapur) launched</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Temple work completed in remaining 36 villages</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q2</div>
+                            <div class="quarter-title">Apr – Jun 2038</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">126 solar parks completed</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">126 CC roads fully functional</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">4 Smart Bus Depots 50% complete</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q3</div>
+                            <div class="quarter-title">Jul – Sep 2038</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Intercity Road Project Phase 2 completed</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">MIDC Visapur: 10 companies onboard</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Public feedback surveys for project impact</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q4</div>
+                            <div class="quarter-title">Oct – Dec 2038</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">All 126 villages now have 24x7 piped water</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">All 4 MIDC zones with 60+ companies active</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Grand opening of Vita & Visapur Smart Depots</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2039 -->
+            <div class="year-section fade-in">
+                <div class="year-header">
+                    <div class="year-badge">2039</div>
+                </div>
+                <div class="quarters-grid">
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q1</div>
+                            <div class="quarter-title">Jan – Mar 2039</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Project audit, third-party evaluation (all 8 projects)</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Launch employment scheme around MIDC zones</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Plan tourism promotion via cultural temples</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q2</div>
+                            <div class="quarter-title">Apr – Jun 2039</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">MLA office mobile dashboard launch</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Start logistics hubs in 2 MIDC zones</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Public felicitation for village development committees</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">Q3</div>
+                            <div class="quarter-title">Jul – Sep 2039</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Grand inauguration of all Smart Bus Depots</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Host Mega "Tehsil Udyog Mahotsav"</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Create MLA Report Card (2035–2039)</div>
+                        </div>
+                    </div>
+
+                    <div class="quarter-card">
+                        <div class="quarter-header">
+                            <div class="quarter-icon">🎯</div>
+                            <div class="quarter-title">Oct 2039 - COMPLETION</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Public declaration of completion: 8 projects, 126 villages, 4 towns</div>
+                        </div>
+                        <div class="project-item">
+                            <div class="project-text">Prepare for next election campaign with achievements</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="deliverables fade-in">
+            <h2>📌 Total Deliverables by October 2039</h2>
+            <div class="deliverable-item">
+                <div class="deliverable-text"><strong>126 Villages</strong> with 24x7 water, solar parks, concrete roads, modern bus stands, & cultural temples</div>
+            </div>
+            <div class="deliverable-item">
+                <div class="deliverable-text"><strong>4 Tehsils</strong> with 250-acre MIDC zones each, 60+ industries, smart depots, intercity highways</div>
+            </div>
+            <div class="deliverable-item">
+                <div class="deliverable-text"><strong>Over 50,000 direct jobs</strong> + tourism economy + smart rural infrastructure</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add smooth scrolling and animation effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.quarter-card');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = Math.random() * 0.3 + 's';
+                        entry.target.classList.add('fade-in');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            cards.forEach(card => {
+                observer.observe(card);
+            });
+
+            // Update progress indicator
+            const progressIndicator = document.querySelector('.progress-indicator');
+            let currentYear = new Date().getFullYear();
+            
+            window.addEventListener('scroll', () => {
+                const scrollPercent = (window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100;
+                const yearProgress = Math.floor((scrollPercent / 100) * 5) + 2035;
+                progressIndicator.innerHTML = `📊 Timeline Progress: ${Math.min(yearProgress, 2039)} | 126 Villages | 4 Tehsils | 8 Projects`;
+            });
+        });
+    </script>
+</body>
+</html>
