@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maharashtra Development Plan 2040-2044</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+            padding: 40px 0;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: slideInDown 1s ease-out;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            animation: slideInUp 1s ease-out 0.3s both;
+        }
+
+        .total-cost {
+            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .total-cost h2 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .total-cost .amount {
+            font-size: 3.5rem;
+            font-weight: 900;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .project-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .project-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .project-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .project-description {
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+
+        .project-cost {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #e74c3c;
+            text-align: right;
+        }
+
+        .funding-section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .funding-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .funding-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .funding-item {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .funding-item:hover {
+            transform: scale(1.05);
+        }
+
+        .funding-source {
+            font-weight: 600;
+        }
+
+        .funding-amount {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .stats-bar {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            color: white;
+        }
+
+        .stat-item h3 {
+            font-size: 2rem;
+            margin-bottom: 5px;
+        }
+
+        .stat-item p {
+            opacity: 0.8;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.02);
+            }
+        }
+
+        .section-highlight {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: 600;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .total-cost .amount {
+                font-size: 2.5rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-bar {
+                flex-direction: column;
+                gap: 20px;
+            }
+        }
+
+        .emoji {
+            font-size: 1.5rem;
+            margin-right: 10px;
+        }
+
+        .priority-high {
+            border-left-color: #e74c3c;
+        }
+
+        .priority-medium {
+            border-left-color: #f39c12;
+        }
+
+        .priority-low {
+            border-left-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏛️ Maharashtra Development Plan</h1>
+            <p>Comprehensive Infrastructure & Technology Development (2040-2044)</p>
+        </div>
+
+        <div class="total-cost">
+            <h2>💰 Total Investment</h2>
+            <div class="amount">₹14,100 Crores</div>
+        </div>
+
+        <div class="section-highlight">
+            <h2>🎯 14 Major Development Sections</h2>
+        </div>
+
+        <div class="projects-grid">
+            <div class="project-card priority-high">
+                <div class="project-number">1️⃣</div>
+                <div class="project-title">🚰 Takari, Tembu, Mhasal Expansion</div>
+                <div class="project-description">Expansion of pipelines, storage, motors to 126 villages</div>
+                <div class="project-cost">₹1,100 Cr</div>
+            </div>
+
+            <div class="project-card priority-medium">
+                <div class="project-number">2️⃣</div>
+                <div class="project-title">⚡ Electricity Reforms & EV Charging Grid</div>
+                <div class="project-description">Subsidy for farmers, solar upgrades, 100+ EV stations</div>
+                <div class="project-cost">₹750 Cr</div>
+            </div>
+
+            <div class="project-card priority-medium">
+                <div class="project-number">3️⃣</div>
+                <div class="project-title">🚌 EV Buses & Depots</div>
+                <div class="project-description">75+ electric buses, 4 smart depots, battery centers</div>
+                <div class="project-cost">₹800 Cr</div>
+            </div>
+
+            <div class="project-card priority-high">
+                <div class="project-number">4️⃣</div>
+                <div class="project-title">🕉️ Shivthirth Temple (Shivaji Maharaj)</div>
+                <div class="project-description">World's largest temple (300+ acres, tourism zone, museum)</div>
+                <div class="project-cost">₹2,000 Cr</div>
+            </div>
+
+            <div class="project-card priority-high">
+                <div class="project-number">5️⃣</div>
+                <div class="project-title">🏭 MIDC Expansion</div>
+                <div class="project-description">4 sectors × 30 companies each: land, infra, incentives</div>
+                <div class="project-cost">₹2,200 Cr</div>
+            </div>
+
+            <div class="project-card priority-medium">
+                <div class="project-number">6️⃣</div>
+                <div class="project-title">🚀 ISRO Aerospace Cluster – Vita</div>
+                <div class="project-description">Aerospace park, satellite labs, public–private JV</div>
+                <div class="project-cost">₹1,000 Cr</div>
+            </div>
+
+            <div class="project-card priority-medium">
+                <div class="project-number">7️⃣</div>
+                <div class="project-title">🏥 Health Tech Park – Shivthirth</div>
+                <div class="project-description">Medical AI R&D, hospital infra, Health SEZ</div>
+                <div class="project-cost">₹850 Cr</div>
+            </div>
+
+            <div class="project-card priority-low">
+                <div class="project-number">8️⃣</div>
+                <div class="project-title">🛸 National Drone Hub – Atpadi</div>
+                <div class="project-description">Drone R&D, training center, export infra, drone port</div>
+                <div class="project-cost">₹750 Cr</div>
+            </div>
+
+            <div class="project-card priority-high">
+                <div class="project-number">9️⃣</div>
+                <div class="project-title">🛣️ Road + Urban Infrastructure</div>
+                <div class="project-description">Road strengthening, streetlights, drainage, flyovers</div>
+                <div class="project-cost">₹1,200 Cr</div>
+            </div>
+
+            <div class="project-card priority-medium">
+                <div class="project-number">🔟</div>
+                <div class="project-title">🏘️ Village Flagship Projects</div>
+                <div class="project-description">₹25L per village avg. + Smart Anganwadi, e-kiosks (126 villages)</div>
+                <div class="project-cost">₹400 Cr</div>
+            </div>
+
+            <div class="project-card priority-low">
+                <div class="project-number">1️⃣1️⃣</div>
+                <div class="project-title">🌉 Flyovers (3 Major Towns)</div>
+                <div class="project-description">Vita, Atpadi, Shivthirth smart traffic flyovers</div>
+                <div class="project-cost">₹450 Cr</div>
+            </div>
+
+            <div class="project-card priority-high">
+                <div class="project-number">1️⃣2️⃣</div>
+                <div class="project-title">🚄 Rail Connectivity Project</div>
+                <div class="project-description">Miraj–Vita–Shivthirth–Atpadi–Sangli dual track + stations</div>
+                <div class="project-cost">₹1,600 Cr</div>
+            </div>
+
+            <div class="project-card priority-medium">
+                <div class="project-number">1️⃣3️⃣</div>
+                <div class="project-title">🚉 Shivthirth Junction Development</div>
+                <div class="project-description">World-class junction terminal + logistics hub</div>
+                <div class="project-cost">₹400 Cr</div>
+            </div>
+
+            <div class="project-card priority-low">
+                <div class="project-number">1️⃣4️⃣</div>
+                <div class="project-title">💻 IT Park – Shivthirth</div>
+                <div class="project-description">Office towers, data center, youth startup zone</div>
+                <div class="project-cost">₹600 Cr</div>
+            </div>
+        </div>
+
+        <div class="funding-section">
+            <div class="funding-title">💰 Funding Strategy</div>
+            <div class="funding-grid">
+                <div class="funding-item">
+                    <div class="funding-source">🏛️ Central Government<br><small>(Rail, Health, Infra, ISRO)</small></div>
+                    <div class="funding-amount">₹4,800 Cr</div>
+                </div>
+                <div class="funding-item">
+                    <div class="funding-source">🏢 State Government<br><small>(Urban Dev, MIDC, Power)</small></div>
+                    <div class="funding-amount">₹3,500 Cr</div>
+                </div>
+                <div class="funding-item">
+                    <div class="funding-source">🏭 Private Sector<br><small>(Drone, IT, Aerospace)</small></div>
+                    <div class="funding-amount">₹2,200 Cr</div>
+                </div>
+                <div class="funding-item">
+                    <div class="funding-source">🤝 CSR Funds & PPPs</div>
+                    <div class="funding-amount">₹1,200 Cr</div>
+                </div>
+                <div class="funding-item">
+                    <div class="funding-source">🕉️ Temple Donations & Tourism Bonds</div>
+                    <div class="funding-amount">₹1,000 Cr</div>
+                </div>
+                <div class="funding-item">
+                    <div class="funding-source">🏛️ MLA Local Fund, ZP, District Planning</div>
+                    <div class="funding-amount">₹1,400 Cr</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-bar">
+            <div class="stat-item">
+                <h3>14</h3>
+                <p>Major Sections</p>
+            </div>
+            <div class="stat-item">
+                <h3>126</h3>
+                <p>Villages Covered</p>
+            </div>
+            <div class="stat-item">
+                <h3>5</h3>
+                <p>Years Timeline</p>
+            </div>
+            <div class="stat-item">
+                <h3>6</h3>
+                <p>Funding Sources</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'slideInUp 0.6s ease-out forwards';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            observer.observe(card);
+        });
+
+        // Add click interaction for project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(-10px)';
+                }, 200);
+            });
+        });
+
+        // Funding items animation
+        document.querySelectorAll('.funding-item').forEach((item, index) => {
+            item.style.animation = `slideInUp 0.6s ease-out ${index * 0.1}s both`;
+        });
+    </script>
+</body>
+</html>

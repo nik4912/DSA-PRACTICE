@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telecom Plans</title>
+    <style>
+        @media print {
+            body { margin: 0; }
+            .page-break { page-break-before: always; }
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 20px;
+            line-height: 1.4;
+            color: #333;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #2c5aa0;
+            padding-bottom: 15px;
+        }
+        
+        .header h1 {
+            color: #2c5aa0;
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #2c5aa0, #4a90e2);
+            color: white;
+            padding: 12px 20px;
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title .emoji {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th {
+            background: linear-gradient(135deg, #34495e, #2c3e50);
+            color: white;
+            padding: 12px 8px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 12px;
+            border: 1px solid #2c3e50;
+        }
+        
+        td {
+            padding: 10px 8px;
+            text-align: center;
+            border: 1px solid #ddd;
+            font-size: 11px;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        tr:hover {
+            background-color: #e3f2fd;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: #27ae60;
+        }
+        
+        .data {
+            font-weight: bold;
+            color: #3498db;
+        }
+        
+        .ott-services {
+            font-size: 10px;
+            color: #8e44ad;
+            font-weight: 500;
+        }
+        
+        .print-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #2c5aa0;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            z-index: 1000;
+        }
+        
+        .print-button:hover {
+            background: #1e3d6f;
+        }
+        
+        @media print {
+            .print-button { display: none; }
+        }
+        
+        .summary-box {
+            background: #f8f9fa;
+            border-left: 4px solid #2c5aa0;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .highlight {
+            background-color: #fff3cd;
+        }
+    </style>
+</head>
+<body>
+    <button class="print-button" onclick="window.print()">🖨️ Print PDF</button>
+    
+    <div class="header">
+        <h1>📱 TELECOM PLANS CATALOG</h1>
+        <p style="margin: 5px 0; color: #666;">Comprehensive Plans & Pricing Guide</p>
+    </div>
+
+    <!-- Section 1: Basic Plans -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="emoji">📱</span>
+            1. Telecom Plans WITHOUT OTT & Music
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Plan</th>
+                    <th>Duration</th>
+                    <th>Price (₹)</th>
+                    <th>Data/Day</th>
+                    <th>Voice</th>
+                    <th>SMS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Basic</td>
+                    <td>1 Month</td>
+                    <td class="price">₹129</td>
+                    <td class="data">1.5 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Standard</td>
+                    <td>1 Month</td>
+                    <td class="price">₹149</td>
+                    <td class="data">2 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Pro</td>
+                    <td>1 Month</td>
+                    <td class="price">₹169</td>
+                    <td class="data">2.5 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Premium</td>
+                    <td>1 Month</td>
+                    <td class="price">₹199</td>
+                    <td class="data">3 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Basic</td>
+                    <td>3 Months</td>
+                    <td class="price">₹349</td>
+                    <td class="data">1.5 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Standard</td>
+                    <td>3 Months</td>
+                    <td class="price">₹399</td>
+                    <td class="data">2 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Pro</td>
+                    <td>3 Months</td>
+                    <td class="price">₹469</td>
+                    <td class="data">2.5 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Premium</td>
+                    <td>3 Months</td>
+                    <td class="price">₹549</td>
+                    <td class="data">3 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Basic</td>
+                    <td>6 Months</td>
+                    <td class="price">₹699</td>
+                    <td class="data">1.5 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Standard</td>
+                    <td>6 Months</td>
+                    <td class="price">₹799</td>
+                    <td class="data">2 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Pro</td>
+                    <td>6 Months</td>
+                    <td class="price">₹949</td>
+                    <td class="data">2.5 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Premium</td>
+                    <td>6 Months</td>
+                    <td class="price">₹1099</td>
+                    <td class="data">3 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Basic</td>
+                    <td>12 Months</td>
+                    <td class="price">₹1299</td>
+                    <td class="data">1.5 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Standard</td>
+                    <td>12 Months</td>
+                    <td class="price">₹1499</td>
+                    <td class="data">2 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Pro</td>
+                    <td>12 Months</td>
+                    <td class="price">₹1699</td>
+                    <td class="data">2.5 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Premium</td>
+                    <td>12 Months</td>
+                    <td class="price">₹1999</td>
+                    <td class="data">3 GB</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Section 2: OTT Plans -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="emoji">🎬</span>
+            2. Telecom Plans WITH OTT & Music
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Plan</th>
+                    <th>Duration</th>
+                    <th>Price (₹)</th>
+                    <th>Data/Day</th>
+                    <th>Voice</th>
+                    <th>OTT & Music Subscriptions</th>
+                    <th>SMS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Basic+</td>
+                    <td>1 Month</td>
+                    <td class="price">₹199</td>
+                    <td class="data">1.5 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Standard+</td>
+                    <td>1 Month</td>
+                    <td class="price">₹249</td>
+                    <td class="data">2 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Pro+</td>
+                    <td>1 Month</td>
+                    <td class="price">₹289</td>
+                    <td class="data">2.5 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify, Prime</td>
+                    <td>100/day</td>
+                </tr>
+                <tr class="highlight">
+                    <td>Premium+</td>
+                    <td>1 Month</td>
+                    <td class="price">₹349</td>
+                    <td class="data">3 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify, Prime, Netflix</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Basic+</td>
+                    <td>3 Months</td>
+                    <td class="price">₹499</td>
+                    <td class="data">1.5 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Standard+</td>
+                    <td>3 Months</td>
+                    <td class="price">₹599</td>
+                    <td class="data">2 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Pro+</td>
+                    <td>3 Months</td>
+                    <td class="price">₹699</td>
+                    <td class="data">2.5 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify, Prime</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Premium+</td>
+                    <td>3 Months</td>
+                    <td class="price">₹849</td>
+                    <td class="data">3 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify, Prime, Netflix</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Basic+</td>
+                    <td>6 Months</td>
+                    <td class="price">₹999</td>
+                    <td class="data">1.5 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Standard+</td>
+                    <td>6 Months</td>
+                    <td class="price">₹1149</td>
+                    <td class="data">2 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Pro+</td>
+                    <td>6 Months</td>
+                    <td class="price">₹1299</td>
+                    <td class="data">2.5 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify, Prime</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Premium+</td>
+                    <td>6 Months</td>
+                    <td class="price">₹1499</td>
+                    <td class="data">3 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify, Prime, Netflix</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Basic+</td>
+                    <td>12 Months</td>
+                    <td class="price">₹1499</td>
+                    <td class="data">1.5 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Standard+</td>
+                    <td>12 Months</td>
+                    <td class="price">₹1799</td>
+                    <td class="data">2 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Pro+</td>
+                    <td>12 Months</td>
+                    <td class="price">₹1999</td>
+                    <td class="data">2.5 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify, Prime</td>
+                    <td>100/day</td>
+                </tr>
+                <tr class="highlight">
+                    <td>Premium+</td>
+                    <td>12 Months</td>
+                    <td class="price">₹2499</td>
+                    <td class="data">3 GB</td>
+                    <td>Unlimited</td>
+                    <td class="ott-services">SonyLiv, Spotify, Prime, Netflix</td>
+                    <td>100/day</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="page-break"></div>
+
+    <!-- Section 3: Data Packs -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="emoji">3️⃣</span>
+            3. Data Packs by Daily Data Allowance
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data/Day</th>
+                    <th>Pack Name</th>
+                    <th>Validity</th>
+                    <th>Price (₹)</th>
+                    <th>Total Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="data">1 GB</td>
+                    <td>Mini</td>
+                    <td>1 Day</td>
+                    <td class="price">₹15</td>
+                    <td>1 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">1 GB</td>
+                    <td>Budget 1G</td>
+                    <td>7 Days</td>
+                    <td class="price">₹59</td>
+                    <td>7 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">1 GB</td>
+                    <td>Saver 1G</td>
+                    <td>28 Days</td>
+                    <td class="price">₹199</td>
+                    <td>28 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">1 GB</td>
+                    <td>Max 1G</td>
+                    <td>84 Days</td>
+                    <td class="price">₹499</td>
+                    <td>84 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">1 GB</td>
+                    <td>Ultra 1G</td>
+                    <td>365 Days</td>
+                    <td class="price">₹1899</td>
+                    <td>365 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">1.5 GB</td>
+                    <td>Daily Boost</td>
+                    <td>7 Days</td>
+                    <td class="price">₹89</td>
+                    <td>10.5 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">1.5 GB</td>
+                    <td>Super Saver</td>
+                    <td>28 Days</td>
+                    <td class="price">₹249</td>
+                    <td>42 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">1.5 GB</td>
+                    <td>Long Surf</td>
+                    <td>84 Days</td>
+                    <td class="price">₹699</td>
+                    <td>126 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">1.5 GB</td>
+                    <td>Yearly Saver</td>
+                    <td>365 Days</td>
+                    <td class="price">₹2299</td>
+                    <td>547.5 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">2 GB</td>
+                    <td>Speed Boost</td>
+                    <td>7 Days</td>
+                    <td class="price">₹119</td>
+                    <td>14 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">2 GB</td>
+                    <td>Super Surf</td>
+                    <td>28 Days</td>
+                    <td class="price">₹289</td>
+                    <td>56 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">2 GB</td>
+                    <td>Max Surf</td>
+                    <td>84 Days</td>
+                    <td class="price">₹799</td>
+                    <td>168 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">2 GB</td>
+                    <td>Mega Surf</td>
+                    <td>365 Days</td>
+                    <td class="price">₹2499</td>
+                    <td>730 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">2.5 GB</td>
+                    <td>Pro Start</td>
+                    <td>7 Days</td>
+                    <td class="price">₹139</td>
+                    <td>17.5 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">2.5 GB</td>
+                    <td>Pro Pack</td>
+                    <td>28 Days</td>
+                    <td class="price">₹319</td>
+                    <td>70 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">2.5 GB</td>
+                    <td>Power Pro</td>
+                    <td>84 Days</td>
+                    <td class="price">₹899</td>
+                    <td>210 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">2.5 GB</td>
+                    <td>Yearly Pro</td>
+                    <td>365 Days</td>
+                    <td class="price">₹2699</td>
+                    <td>912.5 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">3 GB</td>
+                    <td>Turbo Start</td>
+                    <td>7 Days</td>
+                    <td class="price">₹159</td>
+                    <td>21 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">3 GB</td>
+                    <td>Turbo Pack</td>
+                    <td>28 Days</td>
+                    <td class="price">₹349</td>
+                    <td>84 GB</td>
+                </tr>
+                <tr>
+                    <td class="data">3 GB</td>
+                    <td>Turbo Max</td>
+                    <td>84 Days</td>
+                    <td class="price">₹999</td>
+                    <td>252 GB</td>
+                </tr>
+                <tr class="highlight">
+                    <td class="data">3 GB</td>
+                    <td>Turbo Annual</td>
+                    <td>365 Days</td>
+                    <td class="price">₹2899</td>
+                    <td>1095 GB</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Section 4: Voice Plans -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="emoji">4️⃣</span>
+            4. Voice Call Only Plans
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Plan Name</th>
+                    <th>Validity</th>
+                    <th>Price (₹)</th>
+                    <th>Calls</th>
+                    <th>SMS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Talk Mini</td>
+                    <td>7 Days</td>
+                    <td class="price">₹49</td>
+                    <td>Unlimited</td>
+                    <td>50/day</td>
+                </tr>
+                <tr>
+                    <td>Talk Standard</td>
+                    <td>28 Days</td>
+                    <td class="price">₹129</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Talk Max</td>
+                    <td>84 Days</td>
+                    <td class="price">₹349</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+                <tr>
+                    <td>Talk Annual</td>
+                    <td>365 Days</td>
+                    <td class="price">₹1099</td>
+                    <td>Unlimited</td>
+                    <td>100/day</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Section 5: International Roaming -->
+    <div class="section">
+        <h2 class="section-title">
+            <span class="emoji">5️⃣</span>
+            5. International Roaming Plans
+        </h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Region</th>
+                    <th>Validity</th>
+                    <th>Price (₹)</th>
+                    <th>Data</th>
+                    <th>Calls</th>
+                    <th>SMS</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Asia Pack</td>
+                    <td>7 Days</td>
+                    <td class="price">₹999</td>
+                    <td class="data">2 GB</td>
+                    <td>100 mins incoming</td>
+                    <td>50 SMS</td>
+                </tr>
+                <tr>
+                    <td>Europe Pack</td>
+                    <td>14 Days</td>
+                    <td class="price">₹1999</td>
+                    <td class="data">4 GB</td>
+                    <td>200 mins incoming</td>
+                    <td>100 SMS</td>
+                </tr>
+                <tr>
+                    <td>USA/Canada</td>
+                    <td>28 Days</td>
+                    <td class="price">₹3499</td>
+                    <td class="data">6 GB</td>
+                    <td>300 mins incoming</td>
+                    <td>150 SMS</td>
+                </tr>
+                <tr class="highlight">
+                    <td>Global Pack</td>
+                    <td>30 Days</td>
+                    <td class="price">₹4999</td>
+                    <td class="data">10 GB</td>
+                    <td>500 mins any region</td>
+                    <td>200 SMS</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="summary-box">
+        <h3 style="color: #2c5aa0; margin-top: 0;">📊 Plan Summary</h3>
+        <p><strong>Total Plans:</strong> 67 different plan options across 5 categories</p>
+        <p><strong>Price Range:</strong> ₹15 (Mini Data Pack) to ₹4999 (Global Roaming)</p>
+        <p><strong>Best Value:</strong> Annual plans offer significant savings over monthly options</p>
+        <p><strong>Premium Features:</strong> OTT subscriptions include Netflix, Prime, Spotify, and SonyLiv</p>
+    </div>
+
+    <script>
+        // Auto-print functionality
+        function autoPrint() {
+            if (confirm('Would you like to print this document as PDF?')) {
+                window.print();
+            }
+        }
+        
+        // Optional: Auto-trigger print dialog on load
+        // setTimeout(autoPrint, 1000);
+    </script>
+</body>
+</html>

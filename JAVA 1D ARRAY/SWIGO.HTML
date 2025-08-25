@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Nikhil Pawar Built Swastik Empire</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .timeline-container {
+            padding: 60px 40px;
+            position: relative;
+            background: #f8f9fa;
+        }
+
+        .road {
+            position: relative;
+            width: 100%;
+            height: auto;
+        }
+
+        .road-path {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 8px;
+            height: 100%;
+            background: #34495e;
+            transform: translateX(-50%);
+            border-radius: 4px;
+        }
+
+        .road-dashes {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            width: 2px;
+            height: 100%;
+            background: repeating-linear-gradient(
+                to bottom,
+                #fff 0px,
+                #fff 15px,
+                transparent 15px,
+                transparent 30px
+            );
+            transform: translateX(-50%);
+        }
+
+        .milestone {
+            position: relative;
+            margin: 80px 0;
+            display: flex;
+            align-items: center;
+            animation: slideIn 0.8s ease-out;
+        }
+
+        .milestone:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .milestone-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .milestone-marker::before {
+            content: '';
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .year-badge {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
+            color: #2c3e50;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.3);
+            margin: 0 40px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .milestone-content {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin: 0 40px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .milestone-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+
+        .milestone:nth-child(even) .milestone-content {
+            border-left: none;
+            border-right: 5px solid #4ecdc4;
+        }
+
+        .company-name {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 8px;
+        }
+
+        .company-type {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-bottom: 12px;
+            font-style: italic;
+        }
+
+        .locations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 10px;
+        }
+
+        .location-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .special-milestone {
+            border-left-color: #e74c3c !important;
+        }
+
+        .special-milestone .year-badge {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+        }
+
+        .ipo-milestone {
+            border-left-color: #f39c12 !important;
+        }
+
+        .ipo-milestone .year-badge {
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+        }
+
+        .acquisition-milestone {
+            border-left-color: #9b59b6 !important;
+        }
+
+        .acquisition-milestone .year-badge {
+            background: linear-gradient(45deg, #9b59b6, #8e44ad);
+            color: white;
+        }
+
+        .stats-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .timeline-container {
+                padding: 40px 20px;
+            }
+            
+            .milestone {
+                flex-direction: column !important;
+                text-align: center;
+            }
+            
+            .milestone-content {
+                margin: 20px 0 !important;
+                border-left: 5px solid #667eea !important;
+                border-right: none !important;
+            }
+            
+            .year-badge {
+                margin: 10px 0 !important;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>HOW NIKHIL PAWAR BUILT</h1>
+            <h1 style="color: #ff6b6b; font-size: 3rem;">SWASTIK GROUP</h1>
+            <p class="subtitle">*Image Shows The Establishment Year & The BSE Listing Date of All Swastik Group Companies</p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="road">
+                <div class="road-path"></div>
+                <div class="road-dashes"></div>
+
+                <!-- 2027 -->
+                <div class="milestone special-milestone">
+                    <div class="year-badge">2027<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">TrimX</div>
+                        <div class="company-type">Technology Solutions</div>
+                    </div>
+                </div>
+
+                <!-- 2029 -->
+                <div class="milestone">
+                    <div class="year-badge">2029<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Rupiyo Payments</div>
+                        <div class="company-type">BNPL Services</div>
+                    </div>
+                </div>
+
+                <!-- 2030 -->
+                <div class="milestone">
+                    <div class="year-badge">2030<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Swastik Infotech</div>
+                        <div class="company-type">IT Services</div>
+                        <div class="company-name" style="margin-top: 15px;">Swastik Yuva Sports</div>
+                        <div class="company-type">IPL, PKL, ISL</div>
+                    </div>
+                </div>
+
+                <!-- 2031 -->
+                <div class="milestone">
+                    <div class="year-badge">2031<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Swastik Sugar</div>
+                        <div class="company-type">Sugar Manufacturing</div>
+                        <div class="locations">
+                            <span class="location-tag">Alsund</span>
+                            <span class="location-tag">SonarSidh</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2032 -->
+                <div class="milestone special-milestone">
+                    <div class="year-badge">2032<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">TrimX Divestment</div>
+                        <div class="company-type">50% shares sold</div>
+                        <div class="company-name" style="margin-top: 15px;">Rupiyo Payments</div>
+                        <div class="company-type">UPI, Insurance</div>
+                    </div>
+                </div>
+
+                <!-- 2033 -->
+                <div class="milestone">
+                    <div class="year-badge">2033<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Swastik Medicover & Institute</div>
+                        <div class="company-type">Healthcare & Education</div>
+                        <div class="locations">
+                            <span class="location-tag">Vita</span>
+                            <span class="location-tag">Airoli</span>
+                            <span class="location-tag">Hinjewadi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2035 -->
+                <div class="milestone">
+                    <div class="year-badge">2035<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Swastik Yuva Sports</div>
+                        <div class="company-type">SA20, Dubai Expansion</div>
+                        <div class="company-name" style="margin-top: 15px;">Sharadchandra Pawar Cricket Stadium</div>
+                        <div class="company-type">Pune</div>
+                    </div>
+                </div>
+
+                <!-- 2036 -->
+                <div class="milestone">
+                    <div class="year-badge">2036<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Swastik Airports</div>
+                        <div class="company-type">Aviation Infrastructure</div>
+                        <div class="company-name" style="margin-top: 15px;">Swastik Infotech</div>
+                        <div class="company-type">International Expansion</div>
+                    </div>
+                </div>
+
+                <!-- 2038 -->
+                <div class="milestone">
+                    <div class="year-badge">2038<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Swastik Reality</div>
+                        <div class="company-type">Real Estate</div>
+                        <div class="company-name" style="margin-top: 15px;">Swigo Xperia Mall</div>
+                        <div class="company-type">Retail & Commercial</div>
+                        <div class="company-name" style="margin-top: 15px;">Swastik Imperial Hotels</div>
+                        <div class="company-type">Hospitality</div>
+                        <div class="locations">
+                            <span class="location-tag">Airoli</span>
+                            <span class="location-tag">Hinjewadi</span>
+                            <span class="location-tag">Bengaluru</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2040 -->
+                <div class="milestone ipo-milestone">
+                    <div class="year-badge">2040<br><span style="font-size: 0.8rem;">IPO YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Swastik Infotech IPO</div>
+                        <div class="company-type">Listed on BSE</div>
+                        <div class="company-name" style="margin-top: 15px;">Rupiyo Payments IPO</div>
+                        <div class="company-type">Listed on BSE</div>
+                        <div class="company-name" style="margin-top: 15px;">Swastik Green Energy</div>
+                        <div class="company-type">Renewable Energy</div>
+                    </div>
+                </div>
+
+                <!-- 2041 -->
+                <div class="milestone ipo-milestone">
+                    <div class="year-badge">2041<br><span style="font-size: 0.8rem;">IPO YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Swastik Airport IPO</div>
+                        <div class="company-type">Listed on BSE</div>
+                    </div>
+                </div>
+
+                <!-- 2043 -->
+                <div class="milestone">
+                    <div class="year-badge">2043<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Swigo Telecomm</div>
+                        <div class="company-type">Mobile Network, WiFi</div>
+                        <div class="company-name" style="margin-top: 15px;">Swastik Oceana Hotel</div>
+                        <div class="company-type">Premium Hospitality</div>
+                        <div class="locations">
+                            <span class="location-tag">Cotton Green</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2044 -->
+                <div class="milestone ipo-milestone">
+                    <div class="year-badge">2044<br><span style="font-size: 0.8rem;">IPO YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Swigo Telecomm IPO</div>
+                        <div class="company-type">Listed on BSE</div>
+                        <div class="company-name" style="margin-top: 15px;">Swastik Green Energy IPO</div>
+                        <div class="company-type">Listed on BSE</div>
+                        <div class="company-name" style="margin-top: 15px;">Digital Services</div>
+                        <div class="company-type">SwigoLiv, SwigoFy, SwigoPay</div>
+                    </div>
+                </div>
+
+                <!-- 2045 -->
+                <div class="milestone acquisition-milestone">
+                    <div class="year-badge">2045<br><span style="font-size: 0.8rem;">ACQUISITION</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">Zee TV</div>
+                        <div class="company-type">(Acquired)</div>
+                        <div class="company-name" style="margin-top: 15px;">Zepto & Swiggy</div>
+                        <div class="company-type">(Acquired)</div>
+                        <div class="company-name" style="margin-top: 15px;">Sachin Tendulkar International Stadium</div>
+                        <div class="company-type">Cricket Infrastructure</div>
+                    </div>
+                </div>
+
+                <!-- 2047 -->
+                <div class="milestone">
+                    <div class="year-badge">2047<br><span style="font-size: 0.8rem;">EST YEAR</span></div>
+                    <div class="milestone-marker"></div>
+                    <div class="milestone-content">
+                        <div class="company-name">SwigoCabs</div>
+                        <div class="company-type">Transportation Services</div>
+                        <div class="company-name" style="margin-top: 15px;">Swigo EVx</div>
+                        <div class="company-type">Electric Vehicles</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <div class="stat-item">
+                <span class="stat-number">20+</span>
+                <span class="stat-label">Years of Journey</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">6</span>
+                <span class="stat-label">IPO Listings</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">15+</span>
+                <span class="stat-label">Business Verticals</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Cities Covered</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
