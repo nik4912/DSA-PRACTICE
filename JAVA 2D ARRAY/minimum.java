@@ -1,28 +1,33 @@
 import java.util.*;
 
-public class min {
+public class minimum {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("enter a row no: ");
+        System.out.print("enter a row: ");
         int n = sc.nextInt();
-        System.out.println("enter a column: ");
+        System.out.print("enter a Column: ");
         int m = sc.nextInt();
         int arr[][] = new int[n][m];
-        for(int i=0;i<n;i++){
+
+        System.out.println("enter a element: ");
+        for(int i=0; i<n; i++){
             for(int j=0;j<m;j++){
                 arr[i][j] = sc.nextInt();
             }
         }
-        int min = arr[0][0];
-        for(int i=0;i<n;i++){
+
+        System.out.println("smallest element: ");
+        
+        int min = Integer.MAX_VALUE;
+
+        for(int i=0; i<n; i++){
             for(int j=0;j<m;j++){
-                if(arr[i][j]<min){
+                if(min > arr[i][j]){
                     min = arr[i][j];
                 }
             }
-            
         }
-        System.out.println("the largest is: "+min);
+        System.out.print("smallest element is: "+min);
 
     }
     
